@@ -8,6 +8,9 @@ require_once("juncloc.php");
  */
 //echo $_POST['JSON'];
 $location = new junloc();
+$location->json = $_POST['JSON'];
+$location->insert();
+
 //$text = str_replace(array("\n", "\r"), '', $_POST['JSON']);
 //$text = preg_replace("/\r|\n/", "", $_POST['JSON']);
 //$location->json = $text;
@@ -16,5 +19,3 @@ $location = new junloc();
 //$manage = json_encode($_POST['JSON'],JSON_FORCE_OBJECT);
 //echo "THis is MANAGE";
 //echo $manage;
-$location->json = $_POST['JSON'];
-$location->insert();

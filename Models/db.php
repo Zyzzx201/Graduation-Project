@@ -5,8 +5,11 @@ class DB{
   private $Password = '';
   private $DBName = 'gp';
   private $con;
+
+
 public function connect(){
     $this->con = new mysqli($this->hostname,$this->userName,$this->Password,$this->DBName);
+   // $this->con = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
 }
 public function execute($sql){
   $result = $this->con->query($sql);
