@@ -93,9 +93,12 @@ public class Image extends AppCompatActivity implements LocationListener {
         Bundle bd= getIntent().getExtras();
         String uid= bd.getString("u_id");
         String address = txtLat.getText().toString() ;
+        String resultid ="0";
+        String name = "img";
         String type = "submit";
         BackgroundWorker backgroundWorker = new BackgroundWorker(this);
-        backgroundWorker.execute(type,image,address,uid);
+        backgroundWorker.execute(type,image,address,uid,resultid,name);
+        System.err.println(uid);
         Toast.makeText(getApplicationContext(),"submitting successfully, Thanks for your Cooperation", Toast.LENGTH_SHORT).show();
         //Intent ret = new Intent(Image.this, MainActivity.class);
         //startActivity(ret);

@@ -16,44 +16,40 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class BackgroundWorker2 extends AsyncTask<String , Void , String> {
-        Context context;
-        AlertDialog alertDialog;
-        Login login;
+public class BackgroundWorker3 extends AsyncTask<String , Void , String> {
+    Context context;
+    AlertDialog alertDialog;
+    MapsActivity JSON;
 
-        BackgroundWorker2(Context ctx, Login x)
-        {
+    BackgroundWorker3(Context ctx, MapsActivity json) {
         context = ctx;
-        login = x;
-        }
+        JSON = json;
+    }
 
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
-        String login_url = "http://192.168.43.23/webapp/login.php";
-        if (type.equals("login")) {
+        String select_url = "http://192.168.43.23/webapp/jason.php";
+        if (type.equals("select")) {
             try {
-                String username = params[1];
-                String password = params[2];
-                URL url = new URL(login_url);
+                String id = params[1];
+                URL url = new URL(select_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
                 OutputStream OS = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS, "UTF-8"));
-                String data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&" +
-                        URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8") + "&" ;
+                String data = URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(id, "UTF-8") + "&";
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
                 OS.close();
                 InputStream inputStream = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
                 String result = "";
-                String line = "";
-                while ((line = bufferedReader.readLine())!= null)
-                {
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
                     result += line;
                 }
                 bufferedReader.close();
@@ -71,20 +67,21 @@ public class BackgroundWorker2 extends AsyncTask<String , Void , String> {
     @Override
     protected void onPreExecute() {
         alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Login Status");
+        alertDialog.setTitle("selecting Status");
     }
 
     @Override
     protected void onPostExecute(String result) {
-//        alertDialog.setMessage(result);
-//        alertDialog.show();
-//        if(!result.equals("failed"))
-//        {
-            alertDialog.setMessage("Welcome");
-            login.image(result);
-//         }
-
+        //alertDialog.setMessage(result);
+        //System.err.println(result);
+        //
+        //alertDialog.show();
+        //if(!result.equals("failed")){
+            JSON.returnJSON(result);
+            System.err.println(result);
+        //}
     }
+
     @Override
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);

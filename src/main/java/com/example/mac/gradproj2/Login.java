@@ -45,4 +45,10 @@ public class Login extends AppCompatActivity {
         Intent ret = new Intent(Login.this, MainActivity.class);
         startActivity(ret);
     }
+
+    public void onsel(View view)
+    {
+        Intent ret = new Intent(Login.this, MapsActivity.class);
+        startActivity(ret);
+    }
 }
