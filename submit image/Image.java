@@ -91,7 +91,7 @@ public class Image extends AppCompatActivity implements LocationListener {
     {
         String image = img_str;
         Bundle bd= getIntent().getExtras();
-        String uid= bd.getString("u_id");
+        String uid= bd.getString("1");
         String address = txtLat.getText().toString() ;
         String resulti ="0";
         String name = "img";
