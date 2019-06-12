@@ -28,15 +28,15 @@ public class BackgroundWorker extends AsyncTask<String , Void , String> {
     protected String doInBackground(String[] params) {
 
         String type = params[0];
-        String submit_url = "http://192.168.43.23/webapp/Submit.php";
-        String register_url = "http://192.168.43.23/webapp/exec.php";
+        String submit_url = "http://192.168.1.8/gp2/Submit.php";////192.168.43.77
+        String register_url = "http://192.168.1.8/gp2/exec.php";
         if (type.equals("submit")) {
             try {
                 String image = params[1];
                 String address = params[2];
                 String uid = params[3];
-                String resultid =params[4];
-                String name = params[5];
+//                String resultid =params[4];
+                String name = params[4];
                 URL url = new URL(submit_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -47,8 +47,8 @@ public class BackgroundWorker extends AsyncTask<String , Void , String> {
                 String data = URLEncoder.encode("image", "UTF-8") + "=" + URLEncoder.encode(image, "UTF-8") + "&"
                             + URLEncoder.encode("Address", "UTF-8") + "=" + URLEncoder.encode(address, "UTF-8")+ "&"
                             + URLEncoder.encode("u_id", "UTF-8") + "=" + URLEncoder.encode(uid, "UTF-8")+ "&"
-                            + URLEncoder.encode("result_id", "UTF-8") + "=" + URLEncoder.encode(resultid, "UTF-8")+ "&"
-                            + URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8");
+//                            + URLEncoder.encode("result_id", "UTF-8") + "=" + URLEncoder.encode(resultid, "UTF-8")+ "&"
+                        + URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
